@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gobuffalo/packr/v2"
@@ -24,10 +25,13 @@ func getDB() (*geoip2.Reader, error) {
 
 func getOrigin(c *gin.Context) string {
 	r := c.Request
-	origin := r.Header.Get("X-Real-IP")
+	origin := r.Header.Get("X-Forwarded-For")
 	if origin == "" {
 		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
 		origin = ip
+	} else {
+		xffs := strings.SplitN(origin, ", ", 2)
+		origin = xffs[0]
 	}
 	return origin
 }
