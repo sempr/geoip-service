@@ -1,1 +1,9 @@
-{}
+{
+    "name": "GEOIP-Service",
+    "description": "Deploy GEOIP Service on Heroku.",
+    "keywords": ["GEOIP"],
+    "env": {},
+    "website": "https://github.com/sempr/geoip-service",
+    "repository": "https://github.com/sempr/geoip-service",
+    "stack": "container"
+}
